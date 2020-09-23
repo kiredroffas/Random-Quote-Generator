@@ -6,21 +6,43 @@ class QuoteBox extends React.Component {
         super(props);
         this.state = {
             background: '#'+Math.floor(Math.random()*16777215).toString(16),
-            quote: 'Do or do not, there is no try.',
-            author: 'Yoda man'
+            quote: '',
+            author: '',
+            quotes: []
         };
         this.newQuote = this.newQuote.bind(this);
     }
 
     componentDidMount() {
         document.body.style.backgroundColor = this.state.background;
+        const ranNum = Math.floor((Math.random() * 1642));
+        fetch("https://type.fit/api/quotes", {
+            "method": "GET",
+            "headers": {
+            }
+        })
+        .then(response => response.json())
+        .then(res => {
+            console.log(res)
+            this.setState({
+                quotes: res
+            });
+            this.setState({
+                quote: this.state.quotes[ranNum].text,
+                author: this.state.quotes[ranNum].author
+
+            })
+        })
     }
 
 
     newQuote() {
         const randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
+        const ranNum = Math.floor((Math.random() * 1642));
         this.setState({
             background: randomColor,
+            quote: this.state.quotes[ranNum].text,
+            author: this.state.quotes[ranNum].author
         }, () => {
             document.body.style.backgroundColor = this.state.background;
         }); 
@@ -31,7 +53,8 @@ class QuoteBox extends React.Component {
             <div id="wrapper">
                 <div id="quote-box" style={{color: this.state.background}}>
                     <div className="blockquote text-center" id="text">
-                        "{this.state.quote}"
+                        <i className="quote left icon" style={{fontSize: '2rem', color: this.state.background}}></i>
+                        {this.state.quote}
                     </div>
                     <br />
                     <div className="text-right" id="author">
@@ -40,16 +63,16 @@ class QuoteBox extends React.Component {
                     <br/>
                     <br />
                     <div className="row align-items-center">
-                        <div className="col-sm-4">
-                            <button type="button" className="btn" id="tweet-button">
+                        <div className="col-sm-5">
+                            <button type="button" className="btn" id="tweet-button" style={{backgroundColor: this.state.background}}>
                                 <a id="tweet-quote" href="https://twitter.com/intent/tweet">
                                     <i className="twitter icon" style={{fontSize: '1.2rem', color: 'white'}}></i>
                                 </a>
                             </button>
                         </div>
-                        <div className="col-sm-4"></div>
-                        <div className="col-sm-4">
-                            <button type="button" className="btn" id="new-quote" onClick={this.newQuote}>
+                        <div className="col-sm-2"></div>
+                        <div className="col-sm-5">
+                            <button type="button" className="btn" id="new-quote" onClick={this.newQuote} style={{backgroundColor: this.state.background}}>
                                 New Quote
                             </button>
                         </div>
