@@ -1,0 +1,35 @@
+#quote-box {
+    border: 10px solid;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: tan;
+}
+
+#new-quote {
+    float: right;
+    color: black;
+    background-color: slategray;
+}
+
+#text {
+    font-size: 2rem;
+    line-height: 1.5;
+}
+
+#tweet-quote {
+    float: left;
+}
+
+#wrapper {
+    margin: auto;
+    /* width: 50%; */
+    border: 3px solid yellow;
+    padding: 10px;
+
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

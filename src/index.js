@@ -1,3 +1,7 @@
+import 'bootstrap/dist/css/bootstrap.css';
+import 'semantic-ui-css/semantic.min.css';
+// Put other imports below so that CSS from components takes precedence over default styles.
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
