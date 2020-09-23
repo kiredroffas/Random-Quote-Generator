@@ -1,35 +1,45 @@
 #quote-box {
-    border: 10px solid;
+    border-radius: 15px;
     padding-left: 2rem;
     padding-right: 2rem;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    background-color: tan;
+    background-color: black;
 }
 
 #new-quote {
     float: right;
-    color: black;
-    background-color: slategray;
+    background-color: #4b91ee;
+    height: 45px;
+    font-size: 13px;
+    color: white;
+    margin: auto;
 }
 
 #text {
-    font-size: 2rem;
+    font-size: 2.5rem;
     line-height: 1.5;
 }
 
-#tweet-quote {
+#author {
+    font-size: 1.4rem;
+}
+
+#tweet-button {
     float: left;
+    background-color: #4b91ee;
+    height: 45px;
+    padding-left: 15px;
+    margin: auto;
 }
 
 #wrapper {
     margin: auto;
     /* width: 50%; */
-    border: 3px solid yellow;
     padding: 10px;
-
     position: fixed;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
