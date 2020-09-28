@@ -8,7 +8,8 @@ class QuoteBox extends React.Component {
             background: '#'+Math.floor(Math.random()*16777215).toString(16),
             quote: '',
             author: '',
-            quotes: []
+            quotes: [],
+            broken: false
         };
         this.newQuote = this.newQuote.bind(this);
     }
@@ -23,7 +24,7 @@ class QuoteBox extends React.Component {
         })
         .then(response => response.json())
         .then(res => {
-            console.log(res)
+            console.log(res);
             this.setState({
                 quotes: res
             });
@@ -31,21 +32,40 @@ class QuoteBox extends React.Component {
                 quote: this.state.quotes[ranNum].text,
                 author: this.state.quotes[ranNum].author
 
-            })
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            this.setState({
+                quote: "Oops, looks like the quote API is broken.",
+                author: "Sorry",
+                broken: true
+            });
         })
     }
 
 
     newQuote() {
-        const randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
-        const ranNum = Math.floor((Math.random() * 1642));
-        this.setState({
-            background: randomColor,
-            quote: this.state.quotes[ranNum].text,
-            author: this.state.quotes[ranNum].author
-        }, () => {
-            document.body.style.backgroundColor = this.state.background;
-        }); 
+        if (!this.state.broken) {
+            const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            const ranNum = Math.floor((Math.random() * 1642));
+            this.setState({
+                background: randomColor,
+                quote: this.state.quotes[ranNum].text,
+                author: this.state.quotes[ranNum].author
+            }, () => {
+                document.body.style.backgroundColor = this.state.background;
+            });
+        }
+        else {
+            console.log('Could not fetch quotes from quote API');
+            const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            this.setState({
+                background: randomColor,
+            }, () => {
+                document.body.style.backgroundColor = this.state.background;
+            });
+        }
     }
 
     render() {
